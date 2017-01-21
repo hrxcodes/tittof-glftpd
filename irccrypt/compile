@@ -1,0 +1,2 @@
+#!/bin/sh
+gcc -s -o irccrypt -lsodium base64.c irccrypt.c

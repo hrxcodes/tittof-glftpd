@@ -1,0 +1,12 @@
+
+#
+# available variables:
+#    %mkv_name                  ... mkv file name
+#    %mkv_received              ... bytes received
+#    %mkv_formatted_received    ... formatted bytes received (i.e. 28.1MB)
+#    %mkv_expected              ... bytes expected (based on mkv headers)
+#    %mkv_formatted_expected    ... formatted bytes expected
+#
+
+announce.MKV_FAIL = "(mkv-fail) :: %section :: %relname :: %mkv_name :: received %mkv_formatted_received of %mkv_formatted_expected"
+announce.MKV_PASS = "(mkv-pass) :: %section :: %relname :: %mkv_name :: %mkv_formatted_received"
