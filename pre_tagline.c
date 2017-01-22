@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     regex_t tagline;
     int result;
     if ( argc != 4 || strcmp(argv[2], getenv("USER")) != 0) return EXIT_FAILURE;
-    result = regcomp(&tagline, "^[][A-Za-z0-9^_ -]*$", REG_EXTENDED);
+    result = regcomp(&tagline, "^[]\\.[A-Za-z0-9^_ -]*$", REG_EXTENDED);
     result = regexec(&tagline, argv[1], 0, NULL, 0);
     if ( result == REG_NOMATCH || strlen(argv[1]) > 50 ) { result = REG_NOMATCH; }
     regfree(&tagline);
