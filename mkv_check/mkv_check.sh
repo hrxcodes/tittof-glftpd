@@ -109,7 +109,10 @@ fi
 # mkvinfo needs LC_ALL to be set
 export LC_ALL=C
 
-EXPECTED=`$PATH_MKVINFO -z $2/$1 | grep '^+' | awk '{total += $NF} END{print total}'`
+# In older versions such as mkvinfo v57 this was fine.
+#EXPECTED=`$PATH_MKVINFO -z $2/$1 | grep '^+' | awk '{total += $NF} END{print total}'`
+# Newer versions such as v74 / v83 we need to combine the headers and data size to one large total
+EXPECTED="$("${PATH_MKVINFO}" -z "$2/$1" | grep "^+" | sed -E 's/^\+ EBML head size ([0-9]{1,}) data size.*|\+ Segment: size [0-9]{1,} size ([0-9]{1,}) data size.*/\1\2/g' | awk '{total += $1+$2} END {print total}')"
 
 # deal with mkv files with broken header information
 if [[ $EXPECTED -lt 10000 ]]; then
